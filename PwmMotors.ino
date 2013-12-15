@@ -3,7 +3,7 @@ int MOTOR_RIGHT_DIRECTION ;
 int MOTOR_LEFT_SPEED ;                         
 int MOTOR_LEFT_DIRECTION ;                           
 int minimalSpeed=128; 
-
+int demoIteration;
 
 void initRightMotorPwm(int directionPin,int speedPin){
   MOTOR_RIGHT_SPEED=speedPin;
@@ -53,25 +53,26 @@ void pwmTurnRight(int degrees){
   pwmForward();
 }
 
-void showMotorsFetaures(){
+void showMotorsFeatures(){
   int value;
-  if(iteration%2==0){
+  if(demoIteration ==1 || demoIteration==3){
     pwmForward();
     pwmSpeed(200);  
-  }else{
-    pwmBackward();
+  }
+  if(demoIteration ==2 || demoIteration==4){
+   pwmBackward();
     pwmSpeed(200);      
   }
-  if(iteration==3){
+  if(demoIteration==5){
       pwmTurnRight(30);
   }
-  if(iteration==4){
+  if(demoIteration==6){
       pwmTurnLeft(30);
   }
   
-  if(iteration>4){
+  if(demoIteration>6){
     pwmStop();
   }
-  iteration+=1;
+  demoIteration+=1;
   delay(1000); 
   }
