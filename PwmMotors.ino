@@ -53,8 +53,25 @@ void pwmTurnRight(int degrees){
   pwmForward();
 }
 
-void test(){
-  analogWrite(MOTOR_RIGHT_SPEED,135);   
-  analogWrite(MOTOR_LEFT_SPEED, 255);  
-  delay(10000); 
-}
+void showMotorsFetaures(){
+  int value;
+  if(iteration%2==0){
+    pwmForward();
+    pwmSpeed(200);  
+  }else{
+    pwmBackward();
+    pwmSpeed(200);      
+  }
+  if(iteration==3){
+      pwmTurnRight(30);
+  }
+  if(iteration==4){
+      pwmTurnLeft(30);
+  }
+  
+  if(iteration>4){
+    pwmStop();
+  }
+  iteration+=1;
+  delay(1000); 
+  }

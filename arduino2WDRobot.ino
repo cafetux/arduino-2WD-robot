@@ -1,25 +1,16 @@
-//Arduino PLL Speed Control：
-int MOTOR_RIGHT_SPEED = 4;   
-int MOTOR_RIGHT = 5;
-int MOTOR_LEFT_SPEED = 7;                         
-int MOTOR_LEFT = 6;                           
-int forwardLimit=128; 
+
+int iteration=0;
 
 void setup() 
 { 
-    pinMode(MOTOR_RIGHT, OUTPUT);   
-    pinMode(MOTOR_LEFT, OUTPUT); 
+    initRightMotorPwm(4,5);   
+    initLeftMotorPwm(7,6);   
 } 
  
 void loop() 
 { 
-  int value;
-  if(false){
-  digitalWrite(MOTOR_RIGHT,HIGH);   
-  digitalWrite(MOTOR_LEFT, HIGH);       
-  }
-  analogWrite(MOTOR_RIGHT_SPEED, 130);   //PLL Speed Control
-  analogWrite(MOTOR_LEFT_SPEED, 255);   //PLL Speed Control
-  delay(300); 
-    
+  showMotorsFetaures();  
 }
+
+
+
