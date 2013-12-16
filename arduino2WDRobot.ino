@@ -10,12 +10,26 @@ void setup()
   initPing(echoPin, triggerPin);
   initRightMotorPwm(motorRightDirectionPin, motorRightSpeedPin);   
   initLeftMotorPwm(motorLeftDirectionPin, motorLeftSpeedPin); 
-  Serial.begin(9600);    
+  initLogger(9600);    
 } 
  
 void loop() 
 { 
-  //showMotorsFeatures();  
+  //Serial.println(new String("distance:").concat(distance).concat(" cm"));
+  if(seeObstacle()){
+    pwmSpeed(200);
+    pwmForward();
+  }else{
+    pwmStop();
+  }
+  
+  delay(100); 
+}
+
+boolean seeObstacle(){
+  int distance=pingDistanceInCm();
+  logger("distance: {} cm",distance);
+  return distance>20;
 }
 
 
