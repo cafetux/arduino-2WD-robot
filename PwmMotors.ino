@@ -53,6 +53,21 @@ void pwmTurnRight(int degrees){
   pwmForward();
 }
 
+void pwmTurnSmoothRight(int time){
+  pwmForward();
+  analogWrite(MOTOR_LEFT_SPEED,255);   
+  analogWrite(MOTOR_RIGHT_SPEED, 150);
+  delay(time*10); 
+  pwmForward();
+}
+void pwmTurnSmoothLeft(int time){
+  pwmForward();
+  analogWrite(MOTOR_RIGHT_SPEED,255);   
+  analogWrite(MOTOR_LEFT_SPEED, 150);
+  delay(time*10); 
+  pwmForward();
+}
+
 void showMotorsFeatures(){
   int value;
   if(demoIteration ==1 || demoIteration==3){
