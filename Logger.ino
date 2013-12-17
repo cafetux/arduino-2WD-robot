@@ -11,6 +11,7 @@ void logger(String pattern,String value){
   Serial.println(pattern);
 }
 void logger(String pattern,int value){
-  pattern.replace("{}",""+value);
+  String valueString=String(value);
+  pattern.replace("{}",valueString);
   Serial.println(pattern);
 }
