@@ -1,0 +1,9 @@
+#ifndef PWMMOTORS_HEADER
+#define PWMMOTORS_HEADER
+
+
+#define SPEED_SLOW 50
+#define SPEED_MEDIUM 100
+#define SPEED_FAST 150
+
+#endif

@@ -5,13 +5,13 @@ void initLogger(int serial){
  Serial.begin(serial);   
 }
 
-
+void logger(String message){
+  Serial.println(message);
+}
 void logger(String pattern,String value){
   pattern.replace("{}",value);
-  Serial.println(pattern);
+  logger(pattern);
 }
 void logger(String pattern,int value){
-  String valueString=String(value);
-  pattern.replace("{}",valueString);
-  Serial.println(pattern);
+  logger(pattern,String(value));
 }

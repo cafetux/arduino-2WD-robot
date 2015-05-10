@@ -1,10 +1,18 @@
+#include "PwmMotors.h"
+#include "Arduino.h"
+
+const int minimalSpeed=128; 
+int demoIteration;
+
 int MOTOR_RIGHT_SPEED ;   
 int MOTOR_RIGHT_DIRECTION ;
 int MOTOR_LEFT_SPEED ;                         
 int MOTOR_LEFT_DIRECTION ;                           
-int minimalSpeed=128; 
-int demoIteration;
+int DEFAULT_SPEED; 
 
+void initDefaultSpeed(int defaultSpeed){
+  DEFAULT_SPEED=defaultSpeed;
+}
 void initRightMotorPwm(int directionPin,int speedPin){
   MOTOR_RIGHT_SPEED=speedPin;
   MOTOR_RIGHT_DIRECTION=directionPin; 
@@ -41,7 +49,8 @@ void pwmTurnLeft(int degrees){
   analogWrite(MOTOR_RIGHT_SPEED,255);   
   digitalWrite(MOTOR_LEFT_DIRECTION, LOW);  
   analogWrite(MOTOR_LEFT_SPEED, 150);
-  delay(degrees*10); 
+  delay(degrees*4); 
+  pwmSpeed(DEFAULT_SPEED);
   pwmForward();
 }
 
@@ -49,7 +58,8 @@ void pwmTurnRight(int degrees){
   analogWrite(MOTOR_LEFT_SPEED,255);   
   digitalWrite(MOTOR_RIGHT_DIRECTION, LOW);  
   analogWrite(MOTOR_RIGHT_SPEED, 150);
-  delay(degrees*10); 
+  delay(degrees*4); 
+  pwmSpeed(DEFAULT_SPEED);
   pwmForward();
 }
 
@@ -57,14 +67,16 @@ void pwmTurnSmoothRight(int time){
   pwmForward();
   analogWrite(MOTOR_LEFT_SPEED,255);   
   analogWrite(MOTOR_RIGHT_SPEED, 150);
-  delay(time*10); 
+  delay(time*5); 
+  pwmSpeed(DEFAULT_SPEED);
   pwmForward();
 }
 void pwmTurnSmoothLeft(int time){
   pwmForward();
   analogWrite(MOTOR_RIGHT_SPEED,255);   
   analogWrite(MOTOR_LEFT_SPEED, 150);
-  delay(time*10); 
+  delay(time*5); 
+  pwmSpeed(DEFAULT_SPEED);
   pwmForward();
 }
 

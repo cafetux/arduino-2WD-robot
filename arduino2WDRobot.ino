@@ -1,38 +1,54 @@
+#include "PwmMotors.c";
+
 #define echoPin 13
 #define triggerPin 12
 #define motorRightDirectionPin 4
 #define motorRightSpeedPin 5
 #define motorLeftDirectionPin 7
 #define motorLeftSpeedPin 6
+
 #define BLOCKED 10
 #define NEAR_OBSTACLE 5
 #define FARAWAY_OBSTACLE 3
 #define NO_OBSTACLE 0
+
 
 void setup() 
 { 
   initPing(echoPin, triggerPin);
   initRightMotorPwm(motorRightDirectionPin, motorRightSpeedPin);   
   initLeftMotorPwm(motorLeftDirectionPin, motorLeftSpeedPin); 
+  initDefaultSpeed(SPEED_MEDIUM);
+   
   initLogger(9600);    
 } 
  
 void loop() 
 { 
+    
   switch(detect()){
      case BLOCKED: 
-        pwmSpeed(150);
+        pwmSpeed(SPEED_SLOW);
         pwmBackward();
         break;
      case NEAR_OBSTACLE: 
-        pwmTurnLeft(90);
+        if(random(0,2)==1){
+          pwmTurnLeft(90);
+        }else{
+          pwmTurnRight(90);
+        }
         break;
      case FARAWAY_OBSTACLE:
-         pwmTurnSmoothRight(30);
+      pwmSpeed(SPEED_MEDIUM);
+      if(random(0,2)==1){
+          pwmTurnSmoothRight(20);
+        }else{
+          pwmTurnSmoothLeft(20);
+        }
          break;
      default:
-        pwmSpeed(200);
         pwmForward();
+        pwmSpeed(SPEED_MEDIUM);
     }
   delay(100); 
 }
